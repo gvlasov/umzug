@@ -25,7 +25,7 @@ The following example uses a Sqlite database through sequelize and persists the 
 
 ```js
 const { Sequelize } = require('sequelize');
-const { Umzug, SequelizeStorage } = require('umzug');
+const Umzug = require('umzug');
 
 const sequelize = new Sequelize({ dialect: 'sqlite', storage: './db.sqlite' });
 
@@ -36,7 +36,11 @@ const umzug = new Umzug({
       sequelize.getQueryInterface()
     ]
   },
-  storage: new SequelizeStorage({ sequelize })
+	storage: 'sequelize',
+	storageOptions: {
+      sequelize: sequelize,
+  }
+
 });
 
 (async () => {
